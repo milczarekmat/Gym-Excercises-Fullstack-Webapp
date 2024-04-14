@@ -1,6 +1,17 @@
+import HeroContent from './HeroContent'
+import ImageSection from './ImageSection'
+import Navbar from './Navbar'
+
 function Hero() {
   return (
-    <div>Hero</div>
+    <header className="grid sm:grid-cols-2">
+      <ImageSection />
+      <section>
+        <Navbar />
+        <HeroContent />
+      </section>
+    </header>
+
   )
 }
 
