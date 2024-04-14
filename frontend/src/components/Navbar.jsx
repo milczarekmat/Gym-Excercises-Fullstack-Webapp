@@ -13,8 +13,9 @@ function Navbar() {
         className="text-xl *:transition-transform transform hover:*:scale-110 hover:after:*:w-full"
       >
         <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+        {/* <Link to="/about">About</Link> */}
         <Link to="/exercises">Browse exercises</Link>
+        <Link to="/contact">Contact</Link>
       </Stack>
 
       <Button variant="contained" color="secondary">Login</Button>

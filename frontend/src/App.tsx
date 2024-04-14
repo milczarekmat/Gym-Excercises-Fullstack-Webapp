@@ -1,6 +1,9 @@
 import './App.css'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import Hero from './components/Hero'
+import SearchExercise from './components/SearchExercise'
+import Footer from './components/Footer'
+import AboutSection from './components/AboutSection'
 
 const theme = createTheme({
   palette: {
@@ -17,6 +20,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Hero />
+      <AboutSection />
+      <SearchExercise />
+      <Footer />
     </ThemeProvider>
   )
 }

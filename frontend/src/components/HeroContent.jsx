@@ -9,7 +9,17 @@ function HeroContent() {
       </p>
 
       <div className="mt-4 mb-4">
-        <Button color="secondary" variant="contained">Get started</Button>
+        <Button
+          size="large"
+          color="secondary"
+          variant="contained"
+          onClick={() => {
+            const search = document.getElementById('search')
+            search && search.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }}
+        >
+          Get started
+        </Button>
       </div>
     </div>
   )
