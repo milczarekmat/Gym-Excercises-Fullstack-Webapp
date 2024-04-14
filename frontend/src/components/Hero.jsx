@@ -4,12 +4,13 @@ import Navbar from './Navbar'
 
 function Hero() {
   return (
-    <header className="grid sm:grid-cols-2 bg-primary">
-      <ImageSection />
-      <div>
+    <header className="grid lg:grid-cols-2 bg-primary max-h-full relative">
+      <div className="lg:order-last">
         <Navbar />
         <HeroContent />
       </div>
+      <ImageSection />
+
     </header>
 
   )
