@@ -1,11 +1,18 @@
+import { IconContext } from 'react-icons'
 import { CgGym } from 'react-icons/cg'
+import { GiGymBag } from 'react-icons/gi'
+import { MdOutlineSportsGymnastics } from 'react-icons/md'
 
 function AboutSection() {
   return (
     <section className="grid lg:grid-cols-3 lg:space-y-0 space-y-10 lg:space-x-8 p-12 text-justify font-noto">
       <div>
         <div className="flex justify-center align-middle">
-          <CgGym size={35} />
+          <IconContext.Provider
+            value={{ color: '#4c0000', size: '50px' }}
+          >
+            <CgGym size={35} />
+          </IconContext.Provider>
           <h1 className="header pl-2">
             What we do
           </h1>
@@ -14,7 +21,11 @@ function AboutSection() {
       </div>
       <div>
         <div className="flex justify-center align-middle">
-          <CgGym size={35} />
+          <IconContext.Provider
+            value={{ color: '#4c0000', size: '50px' }}
+          >
+            <MdOutlineSportsGymnastics size={35} />
+          </IconContext.Provider>
           <h1 className="header pl-2">
             Why choose us
           </h1>
@@ -27,7 +38,11 @@ function AboutSection() {
       </div>
       <div>
         <div className="flex justify-center align-middle">
-          <CgGym size={35} />
+          <IconContext.Provider
+            value={{ color: '#4c0000', size: '50px' }}
+          >
+            <GiGymBag size={35} />
+          </IconContext.Provider>
           <h1 className="header pl-2">
             How we can help
           </h1>
