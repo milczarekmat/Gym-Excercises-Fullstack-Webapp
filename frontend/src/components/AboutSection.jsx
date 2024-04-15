@@ -1,17 +1,41 @@
+import { CgGym } from 'react-icons/cg'
+
 function AboutSection() {
   return (
-    <section className="grid grid-cols-3">
+    <section className="grid lg:grid-cols-3 lg:space-y-0 space-y-10 lg:space-x-8 p-12 text-justify font-noto">
       <div>
-        <h1>What we do</h1>
-        <p>Our app is designed to help you get fit and healthy with our personalized workout plans.</p>
+        <div className="flex justify-center align-middle">
+          <CgGym size={35} />
+          <h1 className="header pl-2">
+            What we do
+          </h1>
+        </div>
+        <p className="lg:px-12 px-6">Our app is designed to help you get fit and healthy with our personalized workout plans. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem quas qui quod, deleniti praesentium adipisci iusto placeat. Cupiditate suscipit quis dignissimos voluptas dicta illo alias sapiente ad labore blanditiis? Officia?</p>
       </div>
       <div>
-        <h1>Why choose us</h1>
-        <p>Our app is designed to help you get fit and healthy with our personalized workout plans.</p>
+        <div className="flex justify-center align-middle">
+          <CgGym size={35} />
+          <h1 className="header pl-2">
+            Why choose us
+          </h1>
+        </div>
+        <p className="lg:px-12 px-6">
+          Our app is designed to help you get fit and healthy with our personalized workout plans.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate voluptatem rem consequatur eos magnam tempora!
+          Ad sint corrupti amet reiciendis, dignissimos neque voluptates hic totam vel! Ab quo soluta quis.
+        </p>
       </div>
       <div>
-        <h1>How we can help</h1>
-        <p>Our app is designed to help you get fit and healthy with our personalized workout plans.</p>
+        <div className="flex justify-center align-middle">
+          <CgGym size={35} />
+          <h1 className="header pl-2">
+            How we can help
+          </h1>
+        </div>
+        <p className="lg:px-12 px-6">
+          Our app is designed to help you get fit and healthy with our personalized workout plans. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut pariatur, quibusdam qui minus quos incidunt dignissimos quam, laboriosam accusantium cum fugiat quasi corrupti suscipit eius molestias atque est sint soluta?
+
+        </p>
       </div>
     </section>
   )

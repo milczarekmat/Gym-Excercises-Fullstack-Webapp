@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 
 function Hero() {
   return (
-    <header className="grid lg:grid-cols-2 bg-primary max-h-full relative">
+    <header className="grid lg:grid-cols-2 bg-primary max-h-full relative pb-6">
       <div className="lg:order-last">
         <Navbar />
         <HeroContent />
