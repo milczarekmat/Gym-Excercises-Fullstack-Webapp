@@ -1,12 +1,12 @@
 import Navbar from '../components/Navbar'
 
-function Contact() {
+function Exercises() {
   return (
     <>
       <Navbar />
-      <div>Contact</div>
+      <div>Exercises</div>
     </>
   )
 }
 
-export default Contact
+export default Exercises
