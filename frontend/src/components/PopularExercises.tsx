@@ -27,10 +27,10 @@ function PopularExercises() {
       {items.map(({ id, image, title }) => (
         <Box
           key={id}
-          className="rounded-xl bg-primary mx-6 w-[200px] lg:w-[450px] h-[250px] cursor-pointer hover:shadow-2xl transition duration-300 ease-in-out *:hover:scale-110 hover:after:*:w-full flex flex-col justify-center items-center"
+          className="mx-6 flex h-[250px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-primary transition duration-300 ease-in-out hover:shadow-2xl *:hover:scale-110 hover:after:*:w-full lg:w-[450px]"
         >
           <img
-            className="rounded-xl w-[60%] lg:w-[40%] justify-center"
+            className="w-[60%] justify-center rounded-xl lg:w-[40%]"
             src={image}
             alt={id}
           />
@@ -76,7 +76,7 @@ function RightArrow() {
 function Arrow({ img }: { img: string }) {
   return (
     <img
-      className="border-2 rounded-3xl p-2 border-secondary cursor-pointer mx-4"
+      className="mx-4 cursor-pointer rounded-3xl border-2 border-secondary p-2"
       src={img}
     />
   );

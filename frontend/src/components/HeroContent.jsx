@@ -1,31 +1,31 @@
-import { Button } from '@mui/material'
+import { Button } from "@mui/material";
 
 function HeroContent() {
   return (
-    <div className="flex flex-col align-middle justify-center h-full px-10 ml-2 pb-8 absolute  text-white lg:text-black font-bold mix-blend-plus-darker">
-      <h1 className="lg:text-6xl text-4xl font-bold">
+    <div className="absolute ml-2 flex h-full flex-col justify-center px-10 pb-8 align-middle  font-bold text-white mix-blend-plus-darker lg:text-black">
+      <h1 className="text-4xl font-bold lg:text-6xl">
         Welcome to the best workout app
       </h1>
-      <p className="lg:text-xl lg:font-normal text-lg font-bold mt-4 font-noto text-white lg:text-black">
+      <p className="mt-4 font-noto text-lg font-bold text-white lg:text-xl lg:font-normal lg:text-black">
         Get fit and healthy with our personalized workout plans
       </p>
 
-      <div className="mt-4 mb-4">
+      <div className="mb-4 mt-4">
         <Button
           size="large"
           color="secondary"
           variant="contained"
           onClick={() => {
-            const search = document.getElementById('search')
+            const search = document.getElementById("search");
             search &&
-              search.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              search.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
         >
           Get started
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
-export default HeroContent
+export default HeroContent;

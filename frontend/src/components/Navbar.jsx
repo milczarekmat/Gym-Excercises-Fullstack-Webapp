@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className=" bg-primary font-bold flex lg:justify-around justify-between mt-7 mx-8 lg:mx-0 mb-6">
+    <div className=" mx-8 mb-6 mt-7 flex justify-between bg-primary font-bold lg:mx-0 lg:justify-around">
       <Stack
         direction="row"
         spacing={3}
         justifyContent="center"
         alignItems="center"
-        className="text-xl *:transition-transform transform hover:*:scale-110 hover:after:*:w-full"
+        className="transform text-xl *:transition-transform hover:*:scale-110 hover:after:*:w-full"
       >
         <NavLink to="/">Home</NavLink>
         {/* <Link to="/about">About</Link> */}

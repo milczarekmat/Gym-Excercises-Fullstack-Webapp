@@ -7,7 +7,7 @@ function Logo({ className }: LogoProps) {
   return (
     <div
       className={twMerge(
-        "text-white absolute left-10 top-10 text-4xl font-bold",
+        " absolute left-10 top-10 text-4xl font-bold text-white",
         className,
       )}
     >

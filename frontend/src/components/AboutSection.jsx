@@ -5,7 +5,7 @@ import { MdOutlineSportsGymnastics } from "react-icons/md";
 
 function AboutSection() {
   return (
-    <section className="grid lg:grid-cols-3 lg:space-y-0 space-y-10 lg:space-x-8 p-12 text-justify font-noto">
+    <section className="grid space-y-10 p-12 text-justify font-noto lg:grid-cols-3 lg:space-x-8 lg:space-y-0">
       <div>
         <div className="flex justify-center align-middle">
           <IconContext.Provider value={{ color: "#4c0000", size: "50px" }}>
@@ -13,7 +13,7 @@ function AboutSection() {
           </IconContext.Provider>
           <h1 className="header pl-2">What we do</h1>
         </div>
-        <p className="lg:px-12 px-6">
+        <p className="px-6 lg:px-12">
           Our app is designed to help you get fit and healthy with our
           personalized workout plans. Lorem ipsum dolor sit amet consectetur,
           adipisicing elit. Quidem quas qui quod, deleniti praesentium adipisci
@@ -28,7 +28,7 @@ function AboutSection() {
           </IconContext.Provider>
           <h1 className="header pl-2">Why choose us</h1>
         </div>
-        <p className="lg:px-12 px-6">
+        <p className="px-6 lg:px-12">
           Our app is designed to help you get fit and healthy with our
           personalized workout plans. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Voluptate voluptatem rem consequatur eos magnam
@@ -43,7 +43,7 @@ function AboutSection() {
           </IconContext.Provider>
           <h1 className="header pl-2">How we can help</h1>
         </div>
-        <p className="lg:px-12 px-6">
+        <p className="px-6 lg:px-12">
           Our app is designed to help you get fit and healthy with our
           personalized workout plans. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Ut pariatur, quibusdam qui minus quos incidunt

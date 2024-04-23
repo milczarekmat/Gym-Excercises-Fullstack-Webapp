@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 function SearchExercise() {
   return (
     <section id="search">
-      <h1 className="text-3xl font-bold text-center my-6">
+      <h1 className="my-6 text-center text-3xl font-bold">
         Search for effective exercises
       </h1>
       <div className="flex justify-center">

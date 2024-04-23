@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="bg-black text-center text-white min-h-[10vh] mt-4 flex items-center">
+    <div className="mt-4 flex min-h-[10vh] items-center bg-black text-center text-white">
       <div className="w-full">Mateusz Milczarek 2024 ©</div>
     </div>
   );
