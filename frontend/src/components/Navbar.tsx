@@ -41,7 +41,6 @@ function Navbar() {
           <IconButton
             onClick={() => setIsOpened(true)}
             aria-label="delete"
-            color="primary"
             size="large"
             sx={{ ml: 2 }}
           >

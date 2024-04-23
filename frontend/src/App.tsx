@@ -1,20 +1,20 @@
-import "./App.css";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Exercises from "./pages/Exercises";
+import './App.css'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import Exercises from './pages/Exercises'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#212121",
+      main: '#e7d9c3',
     },
     secondary: {
-      main: "#4c0000",
+      main: '#4c0000',
     },
   },
-});
+})
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         <Route path="/exercises" element={<Exercises />}></Route>
       </Routes>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

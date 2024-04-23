@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         primary: "#e7d9c3",
-        secondary: "#4c0000",
+        secondary: "#813F3C",
       },
       fontFamily: {
         noto: ["Noto Sans", "sans-serif"],
