@@ -1,12 +1,17 @@
-import heroImg from '../assets/images/hero_img.jpg'
+import heroImg from "../assets/images/hero_img.jpg";
+import Logo from "./Logo";
 
 function ImageSection() {
   return (
-    <div className="flex justify-center relative">
-      <img className="max-w-full max-h-full lg:rounded-br-3xl" src={heroImg} alt="Hero image" />
-      <div className="text-white absolute left-10 top-10 text-4xl font-bold">LOGO</div>
+    <div className="relative flex justify-center">
+      <img
+        className="max-h-full max-w-full lg:rounded-br-3xl"
+        src={heroImg}
+        alt="Hero image"
+      />
+      <Logo />
     </div>
-  )
+  );
 }
 
-export default ImageSection
+export default ImageSection;

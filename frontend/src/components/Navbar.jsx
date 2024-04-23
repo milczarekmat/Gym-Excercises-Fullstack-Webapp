@@ -1,6 +1,6 @@
-import { Button } from '@mui/material'
-import Stack from '@mui/material/Stack'
-import { NavLink } from 'react-router-dom'
+import { Button } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -12,17 +12,17 @@ function Navbar() {
         alignItems="center"
         className="text-xl *:transition-transform transform hover:*:scale-110 hover:after:*:w-full"
       >
-        <NavLink to="/">
-          Home
-        </NavLink>
+        <NavLink to="/">Home</NavLink>
         {/* <Link to="/about">About</Link> */}
         <NavLink to="/exercises">Browse exercises</NavLink>
         <NavLink to="/contact">Contact</NavLink>
       </Stack>
 
-      <Button variant="contained" color="secondary">Login</Button>
+      <Button variant="contained" color="secondary">
+        Login
+      </Button>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

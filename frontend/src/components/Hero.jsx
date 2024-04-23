@@ -1,6 +1,6 @@
-import HeroContent from './HeroContent'
-import ImageSection from './ImageSection'
-import Navbar from './Navbar'
+import HeroContent from "./HeroContent";
+import ImageSection from "./ImageSection";
+import Navbar from "./Navbar";
 
 function Hero() {
   return (
@@ -10,10 +10,8 @@ function Hero() {
         <HeroContent />
       </div>
       <ImageSection />
-
     </header>
-
-  )
+  );
 }
 
-export default Hero
+export default Hero;

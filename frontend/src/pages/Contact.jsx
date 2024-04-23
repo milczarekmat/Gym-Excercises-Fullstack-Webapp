@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar'
+import Navbar from "../components/Navbar";
 
 function Contact() {
   return (
@@ -6,7 +6,7 @@ function Contact() {
       <Navbar />
       <div>Contact</div>
     </>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

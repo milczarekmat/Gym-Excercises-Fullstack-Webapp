@@ -1,8 +1,8 @@
-import AboutSection from '../components/AboutSection'
-import Footer from '../components/Footer'
-import Hero from '../components/Hero'
-import PopularExercises from '../components/PopularExercises'
-import SearchExercise from '../components/SearchExercise'
+import AboutSection from "../components/AboutSection";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import PopularExercises from "../components/PopularExercises";
+import SearchExercise from "../components/SearchExercise";
 
 function Home() {
   return (
@@ -13,7 +13,7 @@ function Home() {
       <SearchExercise />
       <Footer />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;
