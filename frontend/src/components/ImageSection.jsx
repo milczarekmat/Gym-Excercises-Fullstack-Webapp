@@ -1,4 +1,4 @@
-import heroImg from '../assets/hero_img.jpg'
+import heroImg from '../assets/images/hero_img.jpg'
 
 function ImageSection() {
   return (
