@@ -1,5 +1,5 @@
-import heroImg from "../assets/images/hero_img.jpg";
-import Logo from "./Logo";
+import heroImg from '../assets/images/hero_img.jpg'
+import Logo from './Logo'
 
 function ImageSection() {
   return (
@@ -9,9 +9,9 @@ function ImageSection() {
         src={heroImg}
         alt="Hero image"
       />
-      <Logo />
+      <Logo className="hidden lg:block" />
     </div>
-  );
+  )
 }
 
-export default ImageSection;
+export default ImageSection

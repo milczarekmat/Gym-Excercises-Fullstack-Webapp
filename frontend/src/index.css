@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,5 +15,11 @@ body {
 @layer components {
   .header {
     @apply mb-4 text-center text-3xl font-bold;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    @apply drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)];
   }
 }
