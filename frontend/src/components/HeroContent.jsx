@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 
 function HeroContent() {
   return (
-    <div className="text-shadow absolute z-50 ml-2 flex h-full flex-col justify-center px-10  pb-8 align-middle font-bold text-white mix-blend-plus-darker lg:text-black">
+    <div className="text-shadow lg:text-shadow-none absolute z-50 ml-2 flex h-full flex-col justify-center px-10  pb-8 align-middle font-bold text-white mix-blend-plus-darker lg:text-black">
       <h1 className="text-4xl font-bold lg:text-6xl">
         Welcome to the best workout app
       </h1>

@@ -10,22 +10,29 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import Logo from './Logo'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { useState } from 'react'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 
-function Navbar() {
+function NavbarGuest() {
   const [isOpened, setIsOpened] = useState(false)
+  const location = useLocation()
 
   return (
     <>
-      <nav className="mx-8 mb-6 mt-7 flex justify-between bg-primary font-bold lg:mx-0 lg:justify-around">
-        <Link to="/" className="block lg:hidden">
-          <Logo className="static" />
-        </Link>
+      <nav className="mx-8 flex justify-between bg-primary pb-6 pt-8 font-bold lg:mx-0 lg:justify-around">
+        {location.pathname === '/' ? (
+          <Link to="/" className="block lg:hidden">
+            <Logo className="static" />
+          </Link>
+        ) : (
+          <Link to="/">
+            <Logo className="static" />
+          </Link>
+        )}
 
         {/* hidden on < lg */}
         <div className="hidden transform gap-4 text-xl *:transition-transform hover:*:scale-110 hover:after:*:w-full lg:flex">
@@ -34,9 +41,13 @@ function Navbar() {
           <NavLink to="/contact">Contact</NavLink>
         </div>
         <div className="flex">
-          <Button variant="contained" color="secondary">
-            Login
-          </Button>
+          {location.pathname !== '/login' && (
+            <Link to="/login" className="mt-2 lg:mt-0">
+              <Button variant="contained" color="secondary">
+                Sign in
+              </Button>
+            </Link>
+          )}
 
           <IconButton
             onClick={() => setIsOpened(true)}
@@ -102,4 +113,4 @@ function NavDrawer({
   )
 }
 
-export default Navbar
+export default NavbarGuest

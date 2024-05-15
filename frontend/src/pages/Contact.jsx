@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar";
+import NavbarGuest from '../components/NavbarGuest'
 
 function Contact() {
   return (
     <>
-      <Navbar />
+      <NavbarGuest />
       <div>Contact</div>
     </>
-  );
+  )
 }
 
-export default Contact;
+export default Contact

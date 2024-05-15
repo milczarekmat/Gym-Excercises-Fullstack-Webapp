@@ -1,12 +1,13 @@
+import LoginForm from '../components/LoginForm'
 import NavbarGuest from '../components/NavbarGuest'
 
-function Exercises() {
+function Login() {
   return (
     <>
       <NavbarGuest />
-      <div>Exercises</div>
+      <LoginForm />
     </>
   )
 }
 
-export default Exercises
+export default Login

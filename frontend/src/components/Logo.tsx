@@ -11,7 +11,7 @@ function Logo({ className }: LogoProps) {
         className,
       )}
     >
-      <span className="text-shadow">LOGO</span>
+      <span className="text-shadow">GymApp</span>
     </div>
   )
 }
