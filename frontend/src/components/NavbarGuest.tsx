@@ -53,7 +53,7 @@ function NavbarGuest() {
             onClick={() => setIsOpened(true)}
             aria-label="delete"
             size="large"
-            sx={{ ml: 2 }}
+            sx={{ ml: 2, display: { xs: 'block', md: 'none' } }}
           >
             <RxHamburgerMenu className="block lg:hidden" />
           </IconButton>

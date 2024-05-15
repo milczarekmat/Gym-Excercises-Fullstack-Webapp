@@ -1,10 +1,11 @@
 import './App.css'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { Route, Routes } from 'react-router-dom'
+import { Outlet, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Exercises from './pages/Exercises'
 import Login from './pages/Login'
+import Footer from './components/Footer'
 
 const theme = createTheme({
   palette: {
@@ -21,10 +22,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/exercises" element={<Exercises />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route
+          element={
+            <div>
+              <Outlet />
+              <Footer />
+            </div>
+          }
+        >
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/exercises" element={<Exercises />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+        </Route>
       </Routes>
     </ThemeProvider>
   )

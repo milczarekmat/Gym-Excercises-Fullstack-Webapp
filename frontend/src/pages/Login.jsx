@@ -3,10 +3,10 @@ import NavbarGuest from '../components/NavbarGuest'
 
 function Login() {
   return (
-    <>
+    <section className="h-[90vh]">
       <NavbarGuest />
       <LoginForm />
-    </>
+    </section>
   )
 }
 
