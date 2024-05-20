@@ -23,7 +23,7 @@ const items = [
 
 function PopularExercises() {
   return (
-    <div className="my-20">
+    <div className="mb-36 mt-20">
       <ScrollMenu
         RightArrow={RightArrow}
         LeftArrow={LeftArrow}

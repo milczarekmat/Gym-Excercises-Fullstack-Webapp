@@ -6,6 +6,7 @@ import Contact from './pages/Contact'
 import Exercises from './pages/Exercises'
 import Login from './pages/Login'
 import Footer from './components/Footer'
+import Register from './pages/Register'
 
 const theme = createTheme({
   palette: {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/exercises" element={<Exercises />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
         </Route>
       </Routes>
     </ThemeProvider>

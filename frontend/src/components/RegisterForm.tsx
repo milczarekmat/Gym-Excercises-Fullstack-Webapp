@@ -1,4 +1,4 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import HowToRegIcon from '@mui/icons-material/HowToReg'
 import {
   Container,
   Box,
@@ -6,20 +6,13 @@ import {
   Typography,
   TextField,
   Button,
-  Grid,
+  Checkbox,
+  FormControlLabel,
+  FormControl,
+  FormHelperText,
 } from '@mui/material'
-import { Link } from 'react-router-dom'
 
-function LoginForm() {
-  //   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //     event.preventDefault();
-  //     const data = new FormData(event.currentTarget);
-  //     console.log({
-  //       email: data.get('email'),
-  //       password: data.get('password'),
-  //     });
-  //   };
-
+function RegisterForm() {
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -31,10 +24,10 @@ function LoginForm() {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
+          <HowToRegIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign up
         </Typography>
         {/* onSubmit={handleSubmit} */}
         <Box component="form" noValidate sx={{ mt: 1 }}>
@@ -60,10 +53,33 @@ function LoginForm() {
             id="password"
             autoComplete="current-password"
           />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Repeat password"
+            type="password"
+            color="secondary"
+            id="password"
+            autoComplete="current-password"
+          />
+
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
+
+          <FormControl component="fieldset" error variant="standard">
+            <FormControlLabel
+              required
+              control={<Checkbox color="secondary" />}
+              label="I accept terms and conditions"
+            />
+            <FormHelperText>Error</FormHelperText>
+          </FormControl>
+
           <Button
             type="submit"
             fullWidth
@@ -73,20 +89,10 @@ function LoginForm() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link variant="body2">Forgot password?</Link>
-            </Grid>
-            <Grid item>
-              <Link to="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
     </Container>
   )
 }
 
-export default LoginForm
+export default RegisterForm
