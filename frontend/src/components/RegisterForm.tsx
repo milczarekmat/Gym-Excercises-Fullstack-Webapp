@@ -11,8 +11,31 @@ import {
   FormControl,
   FormHelperText,
 } from '@mui/material'
+import { useForm } from 'react-hook-form'
+
+type FormValues = {
+  email: string
+  password: string
+  terms: boolean
+}
+
+const onSubmit = (data: FormValues) => {
+  console.log(data)
+}
 
 function RegisterForm() {
+  const form = useForm<FormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      terms: false,
+    },
+  })
+
+  const { register, handleSubmit, formState } = form
+
+  const { errors } = formState
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -29,32 +52,49 @@ function RegisterForm() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        {/* onSubmit={handleSubmit} */}
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          sx={{ mt: 1 }}
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <TextField
             margin="normal"
             required
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
             autoComplete="email"
             color="secondary"
             autoFocus
+            {...register('email', {
+              required: 'You must specify an email',
+              pattern: {
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: 'Please enter a valid email',
+              },
+            })}
+            error={!!errors.email}
+            helperText={errors.email?.message}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            name="password"
             label="Password"
             type="password"
             color="secondary"
             id="password"
             autoComplete="current-password"
+            {...register('password', {
+              required: 'You must specify a password',
+            })}
+            error={!!errors.password}
+            helperText={errors.password?.message}
           />
 
-          <TextField
+          {/* <TextField
             margin="normal"
             required
             fullWidth
@@ -62,22 +102,28 @@ function RegisterForm() {
             label="Repeat password"
             type="password"
             color="secondary"
-            id="password"
+            id="password1"
             autoComplete="current-password"
-          />
-
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           /> */}
 
-          <FormControl component="fieldset" error variant="standard">
+          <FormControl
+            component="fieldset"
+            variant="standard"
+            error={!!errors.terms}
+          >
             <FormControlLabel
               required
               control={<Checkbox color="secondary" />}
               label="I accept terms and conditions"
+              {...register('terms', {
+                required: 'You must accept the terms and conditions',
+              })}
             />
-            <FormHelperText>Error</FormHelperText>
+            {errors.terms && (
+              <FormHelperText>
+                You must accept terms and conditions
+              </FormHelperText>
+            )}
           </FormControl>
 
           <Button

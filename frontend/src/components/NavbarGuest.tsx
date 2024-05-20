@@ -23,7 +23,7 @@ function NavbarGuest() {
 
   return (
     <>
-      <nav className="mx-8 flex justify-between bg-primary pb-6 pt-8 font-bold lg:mx-0 lg:justify-around">
+      <nav className="flex justify-between bg-primary px-8 pb-6 pt-8 font-bold lg:mx-0 lg:justify-around">
         {location.pathname === '/' ? (
           <Link to="/" className="block lg:hidden">
             <Logo className="static" />
