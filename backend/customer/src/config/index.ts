@@ -11,9 +11,6 @@ if (process.env.NODE_ENV !== 'prod') {
 export const {
   PORT,
   //   DB_URL,
-  //   APP_SECRET,
-  //   EXCHANGE_NAME,
-  //   MSG_QUEUE_URL,
-  //   CUSTOMER_SERVICE,
-  //   SHOPPING_SERVICE,
+  APP_SECRET,
+  EXCHANGE_NAME,
 } = process.env
