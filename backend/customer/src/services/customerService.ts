@@ -1,3 +1,4 @@
+import { AppEventPayload } from '../api/appEvents'
 import { CustomerRepository } from '../database'
 
 import {
@@ -77,12 +78,12 @@ class CustomerService {
   //     return FormateData(wishlistResult)
   //   }
 
-  async SubscribeEvents(payload: string) {
+  async SubscribeEvents(payload: AppEventPayload) {
     console.log('Triggering.... Customer Events')
 
-    const payloadObj = JSON.parse(payload) as { event: string; data: any }
+    // const payloadObj = JSON.parse(payload) as { event: string; data: any }
 
-    const { event, data } = payloadObj
+    const { event, data } = payload
 
     const { userId, product, order, qty } = data
 

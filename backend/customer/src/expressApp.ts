@@ -1,18 +1,15 @@
 import express from 'express'
 import cors from 'cors'
-// const { customer, appEvents } = require('./api')
-// const { CreateChannel, SubscribeMessage } = require('./utils')
+import { customer, appEvents } from './api'
 
-module.exports = async (app: express.Application) => {
+export default async (app: express.Application) => {
   app.use(express.json())
   app.use(cors())
   app.use(express.static(__dirname + '/public'))
 
   //api
-  // appEvents(app);
+  appEvents(app)
 
-  //   const channel = await CreateChannel()
-
-  //   customer(app, channel)
+  customer(app)
   // error handling
 }

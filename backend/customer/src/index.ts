@@ -1,15 +1,23 @@
+import expressApp from './expressApp'
 import express from 'express'
+import { databaseConnection } from './database'
 import { PORT } from './config'
 
-const app = express()
+const StartServer = async () => {
+  const app = express()
 
-app.use(express.json())
+  await databaseConnection()
 
-app.use('/', (req, res) => {
-  return res.status(200).json({ message: 'Hello from customer' })
-})
+  await expressApp(app)
 
-app.listen(8001, () => {
-  console.log('Customer service is running on port 8001')
-  console.log(PORT)
-})
+  app
+    .listen(PORT, () => {
+      console.log(`listening to port ${PORT}`)
+    })
+    .on('error', (err) => {
+      console.log(err)
+      process.exit()
+    })
+}
+
+StartServer()

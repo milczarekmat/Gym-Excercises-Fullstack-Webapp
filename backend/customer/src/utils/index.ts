@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const { APP_SECRET } = require('../config')
+import { Request } from 'express'
 
 //Utility functions
 export const GenerateSalt = async () => {
@@ -32,13 +33,17 @@ export const GenerateSignature = async (payload: string | object | Buffer) => {
   }
 }
 
-export const ValidateSignature = async (req) => {
+export const ValidateSignature = async (req: Request & { user?: any }) => {
   try {
     const signature = req.get('Authorization')
     console.log(signature)
-    const payload = await jwt.verify(signature.split(' ')[1], APP_SECRET)
-    req.user = payload
-    return true
+    if (signature) {
+      const payload = jwt.verify(signature.split(' ')[1], APP_SECRET)
+      req.user = payload
+      return true
+    } else {
+      return false
+    }
   } catch (error) {
     console.log(error)
     return false
