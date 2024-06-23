@@ -8,9 +8,4 @@ if (process.env.NODE_ENV !== 'prod') {
   dotEnv.config()
 }
 
-export const {
-  PORT,
-  //   DB_URL,
-  APP_SECRET,
-  EXCHANGE_NAME,
-} = process.env
+export const { PORT, DB_URL, APP_SECRET, EXCHANGE_NAME } = process.env
