@@ -16,10 +16,13 @@ import { RxHamburgerMenu } from 'react-icons/rx'
 import { useState } from 'react'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
+import { useUserStore } from '../stores/customerStore'
 
 function NavbarGuest() {
   const [isOpened, setIsOpened] = useState(false)
   const location = useLocation()
+
+  const userStore = useUserStore()
 
   return (
     <>
@@ -41,12 +44,22 @@ function NavbarGuest() {
           <NavLink to="/contact">Contact</NavLink>
         </div>
         <div className="flex">
-          {location.pathname !== '/login' && (
+          {location.pathname !== '/login' && !userStore.isLoggedIn && (
             <Link to="/login" className="mt-2 lg:mt-0">
               <Button variant="contained" color="secondary">
                 Sign in
               </Button>
             </Link>
+          )}
+
+          {userStore.isLoggedIn && (
+            <Button
+              onClick={() => userStore.logout()}
+              variant="contained"
+              color="secondary"
+            >
+              Sign out
+            </Button>
           )}
 
           <IconButton

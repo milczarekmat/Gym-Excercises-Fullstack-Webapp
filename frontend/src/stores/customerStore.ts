@@ -21,7 +21,10 @@ export const useUserStore = create<IUserStore>(
     isLoggedIn: false,
     errorMessage: null,
     setUser: (user: Customer | null) => set({ user }),
-    logout: () => set({ user: null }),
+    logout: () => {
+      set({ user: null, isLoggedIn: false })
+      setAuthToken(null)
+    },
     getProfile: async () => {
       try {
         const response = await GetData('/profile')

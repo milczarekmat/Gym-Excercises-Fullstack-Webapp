@@ -1,7 +1,10 @@
-import { TextField } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 import heroImg from '../assets/images/exercise.jpg'
+import { Link, useLocation } from 'react-router-dom'
 
 function SearchExercise() {
+  const location = useLocation()
+
   return (
     <section className="mb-10 min-h-60 ">
       <div className="grid h-full min-h-52 sm:grid-cols-12">
@@ -13,11 +16,20 @@ function SearchExercise() {
           <div className="flex justify-center">
             <TextField
               color="secondary"
+              disabled
               id="outlined-basic"
               label="Ex. bench press"
               variant="outlined"
               size="small"
             />
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            <Link to="/exercises">
+              <Button size="large" color="secondary" variant="contained">
+                Go over there
+              </Button>
+            </Link>
           </div>
         </div>
 
