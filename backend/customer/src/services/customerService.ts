@@ -8,6 +8,7 @@ import {
   GenerateSignature,
   ValidatePassword,
 } from '../utils'
+import { AppError, BadRequestError } from '../utils/appErrors'
 
 class CustomerService {
   repository: CustomerRepository
@@ -21,33 +22,35 @@ class CustomerService {
 
     const existingCustomer = await this.repository.FindCustomer({ email })
 
-    if (existingCustomer) {
-      const validPassword = await ValidatePassword(
-        password,
-        existingCustomer.password as string,
-        existingCustomer.salt as number
-      )
-      if (validPassword) {
-        const token = await GenerateSignature({
-          email: existingCustomer.email,
-          _id: existingCustomer._id,
-        })
-        return FormateData({ id: existingCustomer._id, token })
-      }
+    if (!existingCustomer) {
+      throw new AppError('Not found', 404, 'User not found', true, false, null)
     }
-
-    return FormateData(null)
+    const validPassword = await ValidatePassword(
+      password,
+      existingCustomer.password as string,
+      existingCustomer.salt as number
+    )
+    if (validPassword) {
+      const token = await GenerateSignature({
+        email: existingCustomer.email,
+        _id: existingCustomer._id,
+      })
+      return FormateData({ id: existingCustomer._id, token })
+    }
   }
 
   async SignUp(userInputs: { email: string; password: string }) {
     const { email, password } = userInputs
 
-    // create salt
-    let salt = await GenerateSalt()
+    const existingCustomer = await this.repository.FindCustomer({ email })
+    if (existingCustomer) {
+      throw new BadRequestError('User already exists with the given email', '')
+    }
 
+    let salt = await GenerateSalt()
     let userPassword = await GeneratePassword(password, salt)
 
-    const existingCustomer = await this.repository.CreateCustomer({
+    const newCustomer = await this.repository.CreateCustomer({
       email,
       password: userPassword,
       salt,
@@ -55,9 +58,9 @@ class CustomerService {
 
     const token = await GenerateSignature({
       email: email,
-      _id: existingCustomer._id,
+      _id: newCustomer._id,
     })
-    return FormateData({ id: existingCustomer._id, token })
+    return FormateData({ id: newCustomer._id, token })
   }
 
   async GetProfile(id: string) {

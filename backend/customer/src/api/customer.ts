@@ -1,28 +1,29 @@
 import { Request, Response, NextFunction, Application } from 'express'
 import CustomerService from '../services/customerService'
 import UserAuth from './middlewares/auth'
+import { asyncWrapper } from '../utils/asyncWrapper'
 
 export default (app: Application): void => {
   const service = new CustomerService()
 
   app.post(
     '/signup',
-    async (req: Request, res: Response, next: NextFunction) => {
+    asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
       const { email, password } = req.body
       const { data } = await service.SignUp({ email, password })
       res.json(data)
-    }
+    })
   )
 
   app.post(
     '/login',
-    async (req: Request, res: Response, next: NextFunction) => {
+    asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
       const { email, password } = req.body
 
       const { data } = await service.SignIn({ email, password })
 
       res.json(data)
-    }
+    })
   )
 
   app.get(

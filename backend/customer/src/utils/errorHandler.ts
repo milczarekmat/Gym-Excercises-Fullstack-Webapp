@@ -1,5 +1,5 @@
 const { createLogger, transports } = require('winston')
-import { AppError } from './appErrors'
+import { AppError, BadRequestError } from './appErrors'
 
 const LogErrors = createLogger({
   transports: [
@@ -34,36 +34,26 @@ class ErrorLogger {
 
 const ErrorHandler = async (err, req, res, next) => {
   const errorLogger = new ErrorLogger()
+  console.log('ErrorHandler')
 
-  process.on('uncaughtException', (reason, promise) => {
-    console.log(reason, 'UNHANDLED')
-    throw reason // need to take care
-  })
-
-  process.on('uncaughtException', (error) => {
-    errorLogger.logError(error)
-    if (errorLogger.isTrustError(err)) {
-      //process exist // need restart
-    }
-  })
-
-  // console.log(err.description, '-------> DESCRIPTION')
-  // console.log(err.message, '-------> MESSAGE')
-  // console.log(err.name, '-------> NAME')
   if (err) {
+    console.log(err, '-------> ERROR')
     await errorLogger.logError(err)
-    if (errorLogger.isTrustError(err)) {
-      if (err.errorStack) {
-        const errorDescription = err.errorStack
-        return res.status(err.statusCode).json({ message: errorDescription })
-      }
+    if (err instanceof BadRequestError) {
       return res.status(err.statusCode).json({ message: err.message })
-    } else {
-      //process exit // terriablly wrong with flow need restart
     }
-    return res.status(err.statusCode).json({ message: err.message })
+
+    if (errorLogger.isTrustError(err)) {
+      const statusCode = err.statusCode || 500
+      const message =
+        err.errorStack || err.message || 'An unexpected error occurred'
+      return res.status(statusCode).json({ message })
+    } else {
+      // Log the error and respond with a generic error message
+      console.error(err)
+      return res.status(500).json({ message: 'Internal Server Error' })
+    }
   }
   next()
 }
-
 export { ErrorHandler }

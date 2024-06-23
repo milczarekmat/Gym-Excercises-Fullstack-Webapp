@@ -24,9 +24,7 @@ class CustomerRepository {
   }
 
   async FindCustomerById({ id }: { id: string }) {
-    const existingCustomer = await CustomerModel.findById(id).populate(
-      'address'
-    )
+    const existingCustomer = await CustomerModel.findById(id)
 
     return existingCustomer
   }
