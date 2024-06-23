@@ -2,9 +2,30 @@ import api from 'axios'
 
 api.defaults.baseURL = 'http://localhost:8001/'
 
+export const externalApiOptions = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+    'X-RapidAPI-Key': 'c59a6a9012mshaec7b3bbbece83fp1b12d0jsne1ebff30419e',
+  },
+}
+
 function setHeader() {
   const token = localStorage.getItem('token')
   if (token) api.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+export async function GetDataWithHeaders(
+  endPoint: string,
+  options: RequestInit,
+  isAuthHeader: boolean,
+) {
+  if (isAuthHeader) setHeader()
+
+  const res = await fetch(endPoint, options)
+  const data = await res.json()
+
+  return data
 }
 
 export async function GetData(endPoint: string) {

@@ -1,10 +1,8 @@
 import { Button, TextField } from '@mui/material'
 import heroImg from '../assets/images/exercise.jpg'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-function SearchExercise() {
-  const location = useLocation()
-
+function SearchExerciseLandingPageSection() {
   return (
     <section className="mb-10 min-h-60 ">
       <div className="grid h-full min-h-52 sm:grid-cols-12">
@@ -45,4 +43,4 @@ function SearchExercise() {
   )
 }
 
-export default SearchExercise
+export default SearchExerciseLandingPageSection
