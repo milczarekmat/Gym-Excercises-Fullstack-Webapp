@@ -57,6 +57,23 @@ class BadRequestError extends AppError {
   }
 }
 
+//404
+class CredentialsError extends AppError {
+  constructor(
+    description = "User with specified credentials doesn't exist",
+    logingErrorResponse: unknown
+  ) {
+    super(
+      'NOT FOUND',
+      STATUS_CODES.NOT_FOUND,
+      description,
+      true,
+      false,
+      logingErrorResponse
+    )
+  }
+}
+
 //400
 class ValidationError extends AppError {
   constructor(description = 'Validation Error', errorStack: unknown) {
@@ -71,4 +88,11 @@ class ValidationError extends AppError {
   }
 }
 
-export { AppError, APIError, BadRequestError, ValidationError, STATUS_CODES }
+export {
+  AppError,
+  APIError,
+  BadRequestError,
+  ValidationError,
+  CredentialsError,
+  STATUS_CODES,
+}

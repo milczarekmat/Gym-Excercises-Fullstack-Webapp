@@ -8,7 +8,7 @@ import {
   GenerateSignature,
   ValidatePassword,
 } from '../utils'
-import { AppError, BadRequestError } from '../utils/appErrors'
+import { AppError, BadRequestError, CredentialsError } from '../utils/appErrors'
 
 class CustomerService {
   repository: CustomerRepository
@@ -23,8 +23,9 @@ class CustomerService {
     const existingCustomer = await this.repository.FindCustomer({ email })
 
     if (!existingCustomer) {
-      throw new AppError('Not found', 404, 'User not found', true, false, null)
+      throw new CredentialsError('Invalid credentials', '')
     }
+
     const validPassword = await ValidatePassword(
       password,
       existingCustomer.password as string,
@@ -37,6 +38,8 @@ class CustomerService {
       })
       return FormateData({ id: existingCustomer._id, token })
     }
+
+    throw new CredentialsError('Invalid credentials', '')
   }
 
   async SignUp(userInputs: { email: string; password: string }) {

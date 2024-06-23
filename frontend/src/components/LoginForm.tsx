@@ -9,15 +9,14 @@ import {
   Grid,
 } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUserStore } from '../stores/customerStore'
+import { useEffect, useState } from 'react'
+import SuccessAlert from './SuccessAlert'
 
 type FormValues = {
   email: string
   password: string
-}
-
-const onSubmit = (data: FormValues) => {
-  console.log(data)
 }
 
 function LoginForm() {
@@ -28,9 +27,34 @@ function LoginForm() {
     },
   })
 
+  const userStore = useUserStore()
+  const navigate = useNavigate()
+
+  const [success, setSuccess] = useState(false)
+
   const { register, handleSubmit, formState } = form
 
   const { errors } = formState
+
+  const onSubmit = async (data: FormValues) => {
+    await userStore.signIn(data.email, data.password)
+  }
+
+  useEffect(() => {
+    if (userStore.isLoggedIn) {
+      setSuccess(true)
+      setTimeout(() => {
+        setSuccess(false)
+        navigate('/')
+      }, 1000)
+    }
+  }, [userStore.isLoggedIn])
+
+  useEffect(() => {
+    return () => {
+      userStore.setErrorMessage(null)
+    }
+  }, [])
 
   return (
     <Container component="main" maxWidth="xs">
@@ -90,6 +114,11 @@ function LoginForm() {
             error={!!errors.password}
             helperText={errors.password?.message}
           />
+
+          {userStore.errorMessage && (
+            <Typography color="error">{userStore.errorMessage}</Typography>
+          )}
+
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -108,11 +137,12 @@ function LoginForm() {
               <Link to={''}>Forgot password?</Link>
             </Grid> */}
             <Grid item>
-              <Link to="/register">{"Don't have an account? Sign Up"}</Link>
+              <Link to="/register">Don't have an account? Sign Up</Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      {success && <SuccessAlert message="You have successfully signed in" />}
     </Container>
   )
 }

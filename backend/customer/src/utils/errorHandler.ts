@@ -1,5 +1,5 @@
 const { createLogger, transports } = require('winston')
-import { AppError, BadRequestError } from './appErrors'
+import { AppError, BadRequestError, CredentialsError } from './appErrors'
 
 const LogErrors = createLogger({
   transports: [
@@ -34,12 +34,16 @@ class ErrorLogger {
 
 const ErrorHandler = async (err, req, res, next) => {
   const errorLogger = new ErrorLogger()
-  console.log('ErrorHandler')
 
   if (err) {
     console.log(err, '-------> ERROR')
     await errorLogger.logError(err)
+
     if (err instanceof BadRequestError) {
+      return res.status(err.statusCode).json({ message: err.message })
+    }
+
+    if (err instanceof CredentialsError) {
       return res.status(err.statusCode).json({ message: err.message })
     }
 

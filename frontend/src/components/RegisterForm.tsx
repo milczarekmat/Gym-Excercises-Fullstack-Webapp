@@ -12,15 +12,15 @@ import {
   FormHelperText,
 } from '@mui/material'
 import { useForm } from 'react-hook-form'
+import { useUserStore } from '../stores/customerStore'
+import { useNavigate } from 'react-router-dom'
+import SuccessAlert from './SuccessAlert'
+import { useEffect, useState } from 'react'
 
 type FormValues = {
   email: string
   password: string
   terms: boolean
-}
-
-const onSubmit = (data: FormValues) => {
-  console.log(data)
 }
 
 function RegisterForm() {
@@ -31,10 +31,34 @@ function RegisterForm() {
       terms: false,
     },
   })
-
   const { register, handleSubmit, formState } = form
 
   const { errors } = formState
+
+  const userStore = useUserStore()
+  const navigate = useNavigate()
+
+  const [success, setSuccess] = useState(false)
+
+  const onSubmit = async (data: FormValues) => {
+    await userStore.signUp(data.email, data.password)
+  }
+
+  useEffect(() => {
+    if (userStore.isLoggedIn) {
+      setSuccess(true)
+      setTimeout(() => {
+        setSuccess(false)
+        navigate('/')
+      }, 1000)
+    }
+  }, [userStore.isLoggedIn])
+
+  useEffect(() => {
+    return () => {
+      userStore.setErrorMessage(null)
+    }
+  }, [])
 
   return (
     <Container component="main" maxWidth="xs">
@@ -126,6 +150,10 @@ function RegisterForm() {
             )}
           </FormControl>
 
+          {userStore.errorMessage && (
+            <Typography color="error">{userStore.errorMessage}</Typography>
+          )}
+
           <Button
             type="submit"
             fullWidth
@@ -137,6 +165,8 @@ function RegisterForm() {
           </Button>
         </Box>
       </Box>
+
+      {success && <SuccessAlert message="You have successfully registered" />}
     </Container>
   )
 }
