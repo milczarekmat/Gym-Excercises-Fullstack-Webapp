@@ -2,10 +2,18 @@ import api from 'axios'
 
 api.defaults.baseURL = 'http://localhost:8001/'
 
-export const externalApiOptions = {
+export const exerciseOptions = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+    'X-RapidAPI-Key': 'c59a6a9012mshaec7b3bbbece83fp1b12d0jsne1ebff30419e',
+  },
+}
+
+export const youtubeOptions = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com',
     'X-RapidAPI-Key': 'c59a6a9012mshaec7b3bbbece83fp1b12d0jsne1ebff30419e',
   },
 }

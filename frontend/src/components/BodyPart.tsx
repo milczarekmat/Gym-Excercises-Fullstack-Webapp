@@ -14,7 +14,7 @@ function BodyPart({ item }) {
       sx={
         exerciseStore.bodyPart === item
           ? {
-              borderTop: '4px solid #FF2625',
+              borderTop: '4px solid #832b2b',
               background: '#fff',
               borderBottomLeftRadius: '20px',
               width: '270px',

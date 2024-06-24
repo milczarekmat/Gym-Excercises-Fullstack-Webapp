@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import Footer from './components/Footer'
 import Register from './pages/Register'
 import BrowseExercises from './pages/BrowseExercises'
+import ExerciseDetail from './pages/ExerciseDetail'
 
 const theme = createTheme({
   palette: {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/exercises" element={<BrowseExercises />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/exercise/:id" element={<ExerciseDetail />} />
         </Route>
       </Routes>
     </ThemeProvider>

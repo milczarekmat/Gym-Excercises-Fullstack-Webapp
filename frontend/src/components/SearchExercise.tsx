@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
-import { GetDataWithHeaders, externalApiOptions } from '../utils/apiCalls'
+import { GetDataWithHeaders, exerciseOptions } from '../utils/apiCalls'
 import { useExerciseStore } from '../stores/exerciseStore'
 import HorizontalScrollbar from './HorizontalScrollbar'
 
@@ -27,7 +27,7 @@ function SearchExercises() {
   //     console.log('fetching body parts')
   //     const bodyPartsData = await GetDataWithHeaders(
   //       'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
-  //       externalApiOptions,
+  //       exerciseOptions,
   //       false,
   //     )
 
@@ -41,7 +41,7 @@ function SearchExercises() {
     if (search) {
       const exercisesData = await GetDataWithHeaders(
         'https://exercisedb.p.rapidapi.com/exercises?offset=0&limit=0',
-        externalApiOptions,
+        exerciseOptions,
         false,
       )
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import { Box, Stack, Typography } from '@mui/material'
 import { useExerciseStore } from '../stores/exerciseStore'
-import { GetDataWithHeaders, externalApiOptions } from '../utils/apiCalls'
+import { GetDataWithHeaders, exerciseOptions } from '../utils/apiCalls'
 import ExerciseCard from './ExerciseCard'
 import Loader from './Loader'
 
@@ -19,13 +19,13 @@ function Exercises() {
       if (exerciseStore.bodyPart === 'all') {
         exercisesData = await GetDataWithHeaders(
           'https://exercisedb.p.rapidapi.com/exercises?offset=0&limit=0',
-          externalApiOptions,
+          exerciseOptions,
           false,
         )
       } else {
         exercisesData = await GetDataWithHeaders(
           `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${exerciseStore.bodyPart}?offset=0&limit=0`,
-          externalApiOptions,
+          exerciseOptions,
           false,
         )
       }

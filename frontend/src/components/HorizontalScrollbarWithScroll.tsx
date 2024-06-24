@@ -1,27 +1,14 @@
 import React, { useContext } from 'react'
 import { Box } from '@mui/material'
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
-import exercise from '../assets/images/exercise.jpg'
-import exercise1 from '../assets/images/exercise1.jpg'
 import leftArrow from '../assets/icons/left-arrow.png'
 import rightArrow from '../assets/icons/right-arrow.png'
 import 'react-horizontal-scrolling-menu/dist/styles.css'
+import type { ExerciseModel } from '../models/ExerciseModel'
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>
 
-const items = [
-  { id: 'exercise', image: exercise, title: 'title' },
-  { id: 'exercise1', image: exercise1, title: 'title' },
-  { id: 'exercise2', image: exercise, title: 'title' },
-  { id: 'exercise3', image: exercise1, title: 'title' },
-  { id: 'exercise4', image: exercise, title: 'title' },
-  { id: 'exercise5', image: exercise1, title: 'title' },
-  { id: 'exercise6', image: exercise1, title: 'title' },
-  { id: 'exercise7', image: exercise, title: 'title' },
-  { id: 'exercise8', image: exercise1, title: 'title' },
-]
-
-function PopularExercises() {
+function HorizontalScrollbarWithScroll({ items }: { items: ExerciseModel[] }) {
   return (
     <div className="mb-36 mt-20">
       <ScrollMenu
@@ -29,17 +16,17 @@ function PopularExercises() {
         LeftArrow={LeftArrow}
         onWheel={onWheel}
       >
-        {items.map(({ id, image, title }) => (
+        {items.map(({ id, gifUrl, name }) => (
           <Box
             key={id}
             className="mx-6 flex h-[250px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-secondary transition duration-300 ease-in-out hover:shadow-2xl *:hover:scale-110 hover:after:*:w-full lg:w-[450px]"
           >
             <img
               className="w-[60%] justify-center rounded-xl lg:w-[40%]"
-              src={image}
+              src={gifUrl}
               alt={id}
             />
-            <h1 className="mt-2 text-xl font-bold text-white">{title}</h1>
+            <h1 className="mt-2 text-xl font-bold text-white">{name}</h1>
           </Box>
         ))}
       </ScrollMenu>
@@ -88,4 +75,4 @@ function Arrow({ img }: { img: string }) {
   )
 }
 
-export default PopularExercises
+export default HorizontalScrollbarWithScroll
