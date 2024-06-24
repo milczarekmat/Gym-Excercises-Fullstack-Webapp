@@ -4,6 +4,7 @@ import { ObjectId } from 'mongodb'
 
 import { FormateData, GenerateSignature } from '../utils'
 import { AppError, BadRequestError, CredentialsError } from '../utils/appErrors'
+import { Exercise } from '../database/types/Exercise'
 
 class TrainingService {
   repository: TrainingRepository
@@ -15,6 +16,49 @@ class TrainingService {
   async getUserTemplates(userId: string) {
     const templates = await this.repository.FindUserTemplates({ userId })
     return FormateData(templates)
+  }
+
+  async updateTemplate({
+    userId,
+    name,
+    exercises,
+  }: {
+    userId: string
+    name: string
+    exercises: Exercise[]
+  }) {
+    const template = await this.repository.FindTemplateByUserIdAndName({
+      userId,
+      name,
+    })
+
+    if (!template) {
+      throw new BadRequestError('Template not found!', '')
+    }
+    const updatedTemplate = await this.repository.UpdateTemplate({
+      userId,
+      name,
+      exercises,
+    })
+    return FormateData(updatedTemplate)
+  }
+
+  async deleteTemplate({ templateId }: { templateId: string }) {
+    // const templateObjId = new ObjectId(templateId)
+
+    const template = await this.repository.FindTemplateById({
+      templateId,
+    })
+
+    if (!template) {
+      throw new BadRequestError('Template not found!', '')
+    }
+
+    const result = await this.repository.DeleteTemplateById({
+      templateObjId: templateId,
+    })
+    console.log(result, 'result')
+    return FormateData({ message: 'Template deleted successfully!' })
   }
 
   async getUserTrainingHistory(userId: string) {
@@ -52,7 +96,7 @@ class TrainingService {
   }) {
     const templateObjectId = new ObjectId(templateId)
     const template = await this.repository.FindTemplateById({
-      templateId: templateObjectId,
+      templateId,
     })
 
     if (!template) {

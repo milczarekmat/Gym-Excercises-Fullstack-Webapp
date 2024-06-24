@@ -59,6 +59,33 @@ export default (app: Application): void => {
     }
   )
 
+  app.put(
+    '/training-template',
+    UserAuth,
+    async (req: any, res: Response, next: NextFunction) => {
+      const { name, exercises } = req.body
+      const { _id } = req.user as { _id: string }
+
+      const { data } = await service.updateTemplate({
+        userId: _id,
+        name,
+        exercises,
+      })
+      res.json(data)
+    }
+  )
+
+  app.delete(
+    '/training-template/:id',
+    UserAuth,
+    asyncWrapper(async (req: any, res: Response, next: NextFunction) => {
+      const { id } = req.params
+      console.log(id, 'id')
+      const { data } = await service.deleteTemplate({ templateId: id })
+      res.json(data)
+    })
+  )
+
   app.get('/whoami', (req: Request, res: Response, next: NextFunction) => {
     return res.status(200).json({ msg: '/customer : I am Training Service' })
   })

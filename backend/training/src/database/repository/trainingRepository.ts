@@ -48,8 +48,30 @@ class TrainingRepository {
     return templates
   }
 
-  async FindTemplateById({ templateId }: { templateId: ObjectId }) {
+  async FindTemplateById({ templateId }: { templateId: string }) {
+    console.log(templateId, 'OBJECT templateId')
     const template = await TrainingTemplateModel.findById(templateId)
+    return template
+  }
+
+  async FindTemplateByUserIdAndName({
+    userId,
+    name,
+  }: {
+    userId: string
+    name: string
+  }) {
+    const template = await TrainingTemplateModel.findOne({
+      userId,
+      name,
+    })
+    return template
+  }
+
+  async DeleteTemplateById({ templateObjId }: { templateObjId: string }) {
+    const template = await TrainingTemplateModel.findByIdAndDelete(
+      templateObjId
+    )
     return template
   }
 
@@ -74,6 +96,23 @@ class TrainingRepository {
     }).populate('template')
 
     return trainings
+  }
+
+  async UpdateTemplate({
+    userId,
+    name,
+    exercises,
+  }: {
+    userId: string
+    name: string
+    exercises: Exercise[]
+  }) {
+    const template = await TrainingTemplateModel.findOneAndUpdate(
+      { userId, name },
+      { exercises },
+      { new: true }
+    )
+    return template
   }
 }
 
