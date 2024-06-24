@@ -13,18 +13,16 @@ const TrainingSchema = new Schema(
     date: Date,
     details: [
       {
-        exercises: [
-          {
-            id: String,
-            bodyPart: String,
-            equipment: String,
-            target: String,
-            name: String,
-            gifUrl: String,
-            secondaryMuscles: [String],
-            instructions: [String],
-          },
-        ],
+        exercise: {
+          id: String,
+          bodyPart: String,
+          equipment: String,
+          target: String,
+          name: String,
+          gifUrl: String,
+          secondaryMuscles: [String],
+          instructions: [String],
+        },
         sets: [
           {
             reps: Number,

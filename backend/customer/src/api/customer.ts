@@ -40,12 +40,6 @@ export default (app: Application): void => {
     }
   )
 
-  //   app.get('/wishlist', UserAuth, async (req: Request, res: Response, next: NextFunction) => {
-  //     const { _id } = req.user
-  //     const { data } = await service.GetWishList(_id)
-  //     return res.status(200).json(data)
-  //   })
-
   app.get('/whoami', (req: Request, res: Response, next: NextFunction) => {
     return res.status(200).json({ msg: '/customer : I am Customer Service' })
   })
