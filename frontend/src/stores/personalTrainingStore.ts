@@ -16,7 +16,7 @@ export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
     setTemplates: (templates: any[]) => set({ templates }),
     fetchTemplates: async () => {
       try {
-        const response = await GetData('/training-template')
+        const response = await GetData('/training/training-template')
         const templates = response.data
         set({ templates })
       } catch (err: any) {
@@ -26,7 +26,7 @@ export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
     },
     addTemplate: async (template: TrainingTemplateModel) => {
       try {
-        await PostData('/training-template', template)
+        await PostData('/training/training-template', template)
       } catch (err: any) {
         console.log('error', err.response.data.message)
         set({ errorMessage: err.response.data.message })

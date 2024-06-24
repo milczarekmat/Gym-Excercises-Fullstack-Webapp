@@ -27,7 +27,7 @@ export const useUserStore = create<IUserStore>(
     },
     getProfile: async () => {
       try {
-        const response = await GetData('/profile')
+        const response = await GetData('/customer/profile')
         const user = response.data
         set({ user, isLoggedIn: true })
       } catch (err: any) {
@@ -37,7 +37,7 @@ export const useUserStore = create<IUserStore>(
     },
     signUp: async (email: string, password: string) => {
       try {
-        const response = await PostData('/signup', {
+        const response = await PostData('/customer/signup', {
           email,
           password,
         })
@@ -55,7 +55,7 @@ export const useUserStore = create<IUserStore>(
     },
     signIn: async (email: string, password: string) => {
       try {
-        const response = await PostData('/login', {
+        const response = await PostData('/customer/login', {
           email,
           password,
         })

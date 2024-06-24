@@ -1,6 +1,6 @@
 import api from 'axios'
 
-api.defaults.baseURL = 'http://localhost:8001/'
+api.defaults.baseURL = 'http://localhost:80/'
 
 export const exerciseOptions = {
   method: 'GET',
