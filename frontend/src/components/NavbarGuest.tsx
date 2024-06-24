@@ -24,10 +24,10 @@ import MailIcon from '@mui/icons-material/Mail'
 import { useUserStore } from '../stores/customerStore'
 
 const settings = [
-  'Moje schematy treningów',
-  'Historia treningów',
-  'Rozpocznij trening',
-  'Wyloguj',
+  'My training templates',
+  'Trainings history',
+  'Start a training',
+  'Sign out',
 ]
 
 function NavbarGuest() {
@@ -49,14 +49,11 @@ function NavbarGuest() {
 
     switch (index) {
       case 0:
-        console.log('Moje schematy treningów')
         navigate('/templates')
         break
       case 1:
-        console.log('Historia treningów')
         break
       case 2:
-        console.log('Rozpocznij trening')
         break
       default:
         userStore.logout()

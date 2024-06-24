@@ -1,13 +1,17 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { GetData, PostData } from '../utils/apiCalls'
-import { TrainingTemplateModel } from '../models/TrainingTemplateModel'
+import { GetData, PostData, PutData } from '../utils/apiCalls'
+import type { TrainingTemplateModel } from '../models/TrainingTemplateModel'
 
 interface IPersonalTrainingStore {
   templates: any[]
   setTemplates: (templates: any[]) => void
+  pushTemplate: (template: any) => void
   fetchTemplates: () => Promise<void>
   errorMessage: null | string
+  addTemplate: (template: TrainingTemplateModel) => Promise<void>
+  updateTemplate: (template: TrainingTemplateModel) => Promise<void>
+  updateTemplateLocally: (template: TrainingTemplateModel) => void
 }
 
 export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
@@ -32,5 +36,21 @@ export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
         set({ errorMessage: err.response.data.message })
       }
     },
+    pushTemplate: (template: any) =>
+      set((state) => ({ templates: [...state.templates, template] })),
+    updateTemplate: async (template: TrainingTemplateModel) => {
+      try {
+        await PutData('/training/training-template', template)
+      } catch (err: any) {
+        console.log('error', err.response.data.message)
+        set({ errorMessage: err.response.data.message })
+      }
+    },
+    updateTemplateLocally: (template: TrainingTemplateModel) =>
+      set((state) => ({
+        templates: state.templates.map((t) =>
+          t.id === template.id ? template : t,
+        ),
+      })),
   })) as any, // Using `as any` to bypass the TypeScript error
 )
