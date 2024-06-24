@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Divider,
@@ -9,8 +10,12 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
 } from '@mui/material'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import Logo from './Logo'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { useState } from 'react'
@@ -18,11 +23,50 @@ import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import { useUserStore } from '../stores/customerStore'
 
+const settings = [
+  'Moje schematy treningów',
+  'Historia treningów',
+  'Rozpocznij trening',
+  'Wyloguj',
+]
+
 function NavbarGuest() {
   const [isOpened, setIsOpened] = useState(false)
   const location = useLocation()
 
+  const navigate = useNavigate()
+  // const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+
   const userStore = useUserStore()
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget)
+  }
+
+  const handleProfileSettings = (index: number) => {
+    setAnchorElUser(null)
+
+    switch (index) {
+      case 0:
+        console.log('Moje schematy treningów')
+        navigate('/templates')
+        break
+      case 1:
+        console.log('Historia treningów')
+        break
+      case 2:
+        console.log('Rozpocznij trening')
+        break
+      default:
+        userStore.logout()
+        break
+    }
+  }
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
 
   return (
     <>
@@ -53,13 +97,41 @@ function NavbarGuest() {
           )}
 
           {userStore.isLoggedIn && (
-            <Button
-              onClick={() => userStore.logout()}
-              variant="contained"
-              color="secondary"
-            >
-              Sign out
-            </Button>
+            <Box sx={{ flexGrow: 0, marginLeft: { xs: '40px', md: '130px' } }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                  <Avatar style={{ backgroundColor: '#F5980E' }}>
+                    {userStore?.user?.email.slice(0, 3)}
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting, index) => (
+                  <MenuItem
+                    key={setting}
+                    onClick={() => handleProfileSettings(index)}
+                  >
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
           )}
 
           <IconButton
@@ -84,6 +156,18 @@ function NavDrawer({
   isOpened: boolean
   onChange: (value: boolean) => void
 }) {
+  const getUrl = (index: number) => {
+    switch (index) {
+      case 0:
+        return '/'
+      case 1:
+        return '/exercises'
+      case 2:
+        return '/contact'
+      default:
+        return '/'
+    }
+  }
   const list = () => (
     <Box
       role="presentation"
@@ -91,26 +175,15 @@ function NavDrawer({
       onKeyDown={() => onChange(false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Home', 'Browse Exercise', 'Contact'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              <Link to={getUrl(index)}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
