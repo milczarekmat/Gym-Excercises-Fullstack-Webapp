@@ -1,12 +1,20 @@
 version: '3'
 services:
-  nosql-db:
+  nosql-db-customer:
     image: mvertes/alpine-mongo
     ports:
       - '27018:27017'
-    container_name: mongodb-gym-app
+    container_name: mongodb-customer
     volumes:
       - ./db/:/data/db
+
+  nosql-db-training:
+    image: mvertes/alpine-mongo
+    ports:
+      - '27019:27017'
+    container_name: mongodb-training
+    volumes:
+      - ./db-training/:/data/db
 
   # rabbitmq:
   #   image: rabbitmq:alpine
