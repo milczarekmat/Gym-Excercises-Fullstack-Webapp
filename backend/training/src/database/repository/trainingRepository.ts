@@ -22,18 +22,18 @@ class TrainingRepository {
   }
 
   async CreateTraining({
-    template,
+    templateId,
     userId,
     date,
     details,
   }: {
-    template: ObjectId
+    templateId: ObjectId
     userId: string
     date: Date
     details: any
   }) {
     const training = new TrainingModel({
-      template,
+      templateId,
       userId,
       date,
       details,

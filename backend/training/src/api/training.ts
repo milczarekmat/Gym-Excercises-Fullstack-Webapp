@@ -25,7 +25,7 @@ export default (app: Application): void => {
     '/training',
     UserAuth,
     asyncWrapper(async (req: any, res: Response, next: NextFunction) => {
-      const { template: templateId, date, details } = req.body
+      const { templateId, date, details } = req.body
       const { _id } = req.user as { _id: string }
 
       const { data } = await service.createTraining({

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const TrainingSchema = new Schema(
   {
-    template: {
+    templateId: {
       type: Schema.Types.ObjectId,
       ref: 'TrainingTemplate',
       require: true,

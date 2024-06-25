@@ -104,7 +104,7 @@ class TrainingService {
     }
 
     const training = await this.repository.CreateTraining({
-      template: templateObjectId,
+      templateId: templateObjectId,
       userId,
       date,
       details,
