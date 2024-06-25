@@ -175,6 +175,7 @@ function Training() {
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Template</InputLabel>
               <Select
+                className="ml-4"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={selectedTemplate}
@@ -196,7 +197,7 @@ function Training() {
           {isTrainingStarted ? (
             <>
               <Button
-                variant="contained"
+                variant="outlined"
                 color="secondary"
                 onClick={() => handleTrainingCancel()}
               >
@@ -207,6 +208,7 @@ function Training() {
                 variant="contained"
                 color="secondary"
                 onClick={handleSaveTraining}
+                sx={{ marginLeft: '10px' }}
               >
                 Save training
               </Button>

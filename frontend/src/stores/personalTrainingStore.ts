@@ -5,19 +5,23 @@ import type { TrainingTemplateModel } from '../models/TrainingTemplateModel'
 
 interface IPersonalTrainingStore {
   templates: any[]
+  trainingHistory: any[]
+  errorMessage: null | string
   setTemplates: (templates: any[]) => void
   pushTemplate: (template: any) => void
   fetchTemplates: () => Promise<void>
-  errorMessage: null | string
   addTemplate: (template: TrainingTemplateModel) => Promise<void>
   updateTemplate: (template: TrainingTemplateModel) => Promise<void>
   updateTemplateLocally: (template: TrainingTemplateModel) => void
   saveTraining: (training: any) => Promise<any>
+  fetchTrainingHistory: () => Promise<void>
 }
 
 export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
   devtools((set) => ({
     templates: [],
+    trainingHistory: [],
+    errorMessage: null,
     setTemplates: (templates: any[]) => set({ templates }),
     fetchTemplates: async () => {
       try {
@@ -57,6 +61,16 @@ export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
       try {
         const result = await PostData('/training/training', training)
         return result
+      } catch (err: any) {
+        console.log('error', err.response.data.message)
+        set({ errorMessage: err.response.data.message })
+      }
+    },
+    fetchTrainingHistory: async () => {
+      try {
+        const response = await GetData('/training/training')
+        const trainingHistory = response.data
+        set({ trainingHistory })
       } catch (err: any) {
         console.log('error', err.response.data.message)
         set({ errorMessage: err.response.data.message })

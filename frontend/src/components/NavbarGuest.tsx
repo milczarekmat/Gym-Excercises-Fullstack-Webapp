@@ -52,6 +52,7 @@ function NavbarGuest() {
         navigate('/templates')
         break
       case 1:
+        navigate('/history')
         break
       case 2:
         navigate('/training')
