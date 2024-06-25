@@ -54,6 +54,7 @@ function NavbarGuest() {
       case 1:
         break
       case 2:
+        navigate('/training')
         break
       default:
         userStore.logout()

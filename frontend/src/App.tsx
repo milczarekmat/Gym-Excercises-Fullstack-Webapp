@@ -10,6 +10,7 @@ import BrowseExercises from './pages/BrowseExercises'
 import ExerciseDetail from './pages/ExerciseDetail'
 import TrainingTemplates from './pages/TrainingTemplates'
 import TemplateDetail from './pages/TemplateDetail'
+import Training from './pages/Training'
 
 const theme = createTheme({
   palette: {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/exercises" element={<BrowseExercises />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/training" element={<Training />}></Route>
           <Route path="/exercise/:id" element={<ExerciseDetail />} />
           <Route path="/templates" element={<TrainingTemplates />} />
           <Route path="/template/:name" element={<TemplateDetail />} />
