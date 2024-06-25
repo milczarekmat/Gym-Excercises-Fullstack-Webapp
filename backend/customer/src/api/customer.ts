@@ -27,6 +27,20 @@ export default (app: Application): void => {
   )
 
   app.get(
+    '/verify-token',
+    UserAuth,
+    async (
+      req: Request & { user?: any },
+      res: Response,
+      next: NextFunction
+    ) => {
+      const { _id } = req.user as { _id: string }
+      const { data } = await service.GetProfile(_id)
+      res.json(data)
+    }
+  )
+
+  app.get(
     '/profile',
     UserAuth,
     async (
