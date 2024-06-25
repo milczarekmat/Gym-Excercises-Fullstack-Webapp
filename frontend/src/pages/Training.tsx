@@ -41,8 +41,8 @@ function Training() {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalExercise, setModalExercise] = useState(null)
-  const [modalReps, setModalReps] = useState(0)
-  const [modalWeight, setModalWeight] = useState(0)
+  const [modalReps, setModalReps] = useState(null)
+  const [modalWeight, setModalWeight] = useState(null)
 
   const handleModalOpen = (exercise: ExerciseModel) => {
     setModalExercise(exercise)
@@ -50,8 +50,8 @@ function Training() {
   }
   const handleModalClose = () => {
     setModalExercise(null)
-    setModalReps(0)
-    setModalWeight(0)
+    setModalReps(null)
+    setModalWeight(null)
     setIsModalOpen(false)
   }
 
@@ -157,10 +157,6 @@ function Training() {
       )
     }
   }, [selectedTemplate])
-
-  useEffect(() => {
-    console.log(trainingState)
-  }, [trainingState])
 
   return (
     <>
@@ -301,6 +297,7 @@ function Training() {
             type="number"
             fullWidth
             variant="outlined"
+            inputProps={{ min: 0 }}
             color="secondary"
             onChange={(e) => setModalReps(Number(e.target.value))}
           />
@@ -311,6 +308,7 @@ function Training() {
             label="Weight"
             type="number"
             fullWidth
+            inputProps={{ min: 0 }}
             variant="outlined"
             color="secondary"
             onChange={(e) => setModalWeight(Number(e.target.value))}
@@ -320,7 +318,12 @@ function Training() {
             variant="contained"
             color="secondary"
             sx={{ marginTop: '10px' }}
-            disabled={!modalReps || !modalWeight}
+            disabled={
+              modalReps === null ||
+              modalWeight === null ||
+              modalReps < 0 ||
+              modalWeight < 0
+            }
             onClick={() => {
               addExerciseSet(modalExercise.id, {
                 reps: modalReps,
