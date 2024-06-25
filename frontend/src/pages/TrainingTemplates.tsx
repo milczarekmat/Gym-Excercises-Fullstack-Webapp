@@ -43,7 +43,7 @@ function TrainingTemplates() {
 
     const newTemplate = {
       name: templateName,
-      userId: userStore.user.id,
+      userId: userStore?.user?._id,
       exercises: [],
     }
     await personalTrainingStore.addTemplate(newTemplate)

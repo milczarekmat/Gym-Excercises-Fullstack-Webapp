@@ -12,6 +12,7 @@ interface IPersonalTrainingStore {
   addTemplate: (template: TrainingTemplateModel) => Promise<void>
   updateTemplate: (template: TrainingTemplateModel) => Promise<void>
   updateTemplateLocally: (template: TrainingTemplateModel) => void
+  saveTraining: (training: any) => Promise<any>
 }
 
 export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
@@ -52,5 +53,14 @@ export const usePersonalTrainingStore = create<IPersonalTrainingStore>(
           t.id === template.id ? template : t,
         ),
       })),
+    saveTraining: async (training: any) => {
+      try {
+        const result = await PostData('/training/training', training)
+        return result
+      } catch (err: any) {
+        console.log('error', err.response.data.message)
+        set({ errorMessage: err.response.data.message })
+      }
+    },
   })) as any, // Using `as any` to bypass the TypeScript error
 )
