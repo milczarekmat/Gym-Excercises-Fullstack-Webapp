@@ -18,6 +18,7 @@ import {
 import { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import NavbarGuest from '../components/NavbarGuest'
 import { usePersonalTrainingStore } from '../stores/personalTrainingStore'
 import { useUserStore } from '../stores/customerStore'
@@ -43,6 +44,7 @@ function Training() {
   const [modalExercise, setModalExercise] = useState(null)
   const [modalReps, setModalReps] = useState(null)
   const [modalWeight, setModalWeight] = useState(null)
+  const [modalSetIndex, setModalSetIndex] = useState(null)
 
   const handleModalOpen = (exercise: ExerciseModel) => {
     setModalExercise(exercise)
@@ -52,7 +54,20 @@ function Training() {
     setModalExercise(null)
     setModalReps(null)
     setModalWeight(null)
+    setModalSetIndex(null)
     setIsModalOpen(false)
+  }
+
+  const handleEditSet = (
+    exercise: ExerciseModel,
+    setIndex: number,
+    detail: any,
+  ) => {
+    setModalExercise(exercise)
+    setModalSetIndex(setIndex)
+    setModalWeight(detail.sets[setIndex].weight)
+    setModalReps(detail.sets[setIndex].reps)
+    setIsModalOpen(true)
   }
 
   const [trainingState, setTrainingState] = useState(null)
@@ -271,6 +286,14 @@ function Training() {
                       </Typography>
                       <IconButton
                         color="secondary"
+                        onClick={() =>
+                          handleEditSet(exercise, setIndex, detail)
+                        }
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        color="secondary"
                         onClick={() => removeExerciseSet(exercise.id, setIndex)}
                       >
                         <DeleteIcon />
@@ -327,10 +350,16 @@ function Training() {
               modalWeight < 0
             }
             onClick={() => {
-              addExerciseSet(modalExercise.id, {
-                reps: modalReps,
-                weight: modalWeight,
-              })
+              if (modalSetIndex !== null) {
+                updateExerciseSet(modalExercise.id, modalSetIndex, {
+                  reps: modalReps,
+                  weight: modalWeight,
+                })
+              } else
+                addExerciseSet(modalExercise.id, {
+                  reps: modalReps,
+                  weight: modalWeight,
+                })
               handleModalClose()
             }}
           >

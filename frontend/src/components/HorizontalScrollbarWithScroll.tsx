@@ -8,7 +8,7 @@ import type { ExerciseModel } from '../models/ExerciseModel'
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>
 
-function HorizontalScrollbarWithScroll({ items }: { items: ExerciseModel[] }) {
+function HorizontalScrollbarWithScroll({ items }: { items: any }) {
   return (
     <div className="mb-36 mt-20">
       <ScrollMenu
@@ -16,17 +16,17 @@ function HorizontalScrollbarWithScroll({ items }: { items: ExerciseModel[] }) {
         LeftArrow={LeftArrow}
         onWheel={onWheel}
       >
-        {items.map(({ id, gifUrl, name }) => (
+        {items.map(({ id, image, title }) => (
           <Box
             key={id}
             className="mx-6 flex h-[250px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-secondary transition duration-300 ease-in-out hover:shadow-2xl *:hover:scale-110 hover:after:*:w-full lg:w-[450px]"
           >
             <img
               className="w-[60%] justify-center rounded-xl lg:w-[40%]"
-              src={gifUrl}
+              src={image}
               alt={id}
             />
-            <h1 className="mt-2 text-xl font-bold text-white">{name}</h1>
+            <h1 className="mt-2 text-xl font-bold text-white">{title}</h1>
           </Box>
         ))}
       </ScrollMenu>
