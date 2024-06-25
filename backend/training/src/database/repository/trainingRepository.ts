@@ -76,9 +76,11 @@ class TrainingRepository {
   }
 
   async FindUserTrainingHistory({ userId }: { userId: string }) {
-    const trainings = await TrainingModel.find({ userId: userId }).populate(
-      'templateId'
-    )
+    const trainings = await TrainingModel.find({ userId: userId })
+      .sort({
+        date: -1,
+      })
+      .populate('templateId')
 
     return trainings
   }
