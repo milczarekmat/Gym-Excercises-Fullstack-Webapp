@@ -1,19 +1,31 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { usePersonalTrainingStore } from '../stores/personalTrainingStore'
 import NavbarGuest from '../components/NavbarGuest'
 import ExerciseCard from '../components/ExerciseCard'
-import { Box, Button, Grid, Typography } from '@mui/material'
-import { ExerciseModel } from '../models/ExerciseModel'
+import type { ExerciseModel } from '../models/ExerciseModel'
 
 function TemplateDetail() {
   const { name } = useParams()
   const personalTrainingStore = usePersonalTrainingStore()
 
-  const currentTemplate = personalTrainingStore.templates.find(
-    (t) => t.name === name,
-  )
+  const [currentTemplate, setCurrentTemplate] = useState()
+
+  useEffect(() => {
+    const fetchTemplate = async () => {
+      if (!currentTemplate) await personalTrainingStore.fetchTemplates()
+    }
+
+    fetchTemplate()
+  }, [])
+
+  useEffect(() => {
+    setCurrentTemplate(
+      personalTrainingStore.templates.find((t) => t.name === name),
+    )
+  }, [personalTrainingStore.templates])
 
   const handleDelete = async (selectedExercise: ExerciseModel) => {
     currentTemplate.exercises = currentTemplate?.exercises.filter(

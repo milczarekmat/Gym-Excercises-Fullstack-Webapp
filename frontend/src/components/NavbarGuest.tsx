@@ -84,7 +84,7 @@ function NavbarGuest() {
         <div className="hidden transform gap-4 text-xl *:transition-transform hover:*:scale-110 hover:after:*:w-full lg:flex">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/exercises">Browse exercises</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+          {/* <NavLink to="/contact">Contact</NavLink> */}
         </div>
         <div className="flex">
           {location.pathname !== '/login' && !userStore.isLoggedIn && (
@@ -174,7 +174,7 @@ function NavDrawer({
       onKeyDown={() => onChange(false)}
     >
       <List>
-        {['Home', 'Browse Exercise', 'Contact'].map((text, index) => (
+        {['Home', 'Browse Exercise'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <Link to={getUrl(index)}>

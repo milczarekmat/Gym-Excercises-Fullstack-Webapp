@@ -13,6 +13,7 @@ interface IUserStore {
   getProfile: () => Promise<void>
   signIn: (email: string, password: string) => Promise<void>
   setErrorMessage: (message: string | null) => void
+  verifyToken: () => Promise<void>
 }
 
 export const useUserStore = create<IUserStore>(
@@ -33,6 +34,17 @@ export const useUserStore = create<IUserStore>(
       } catch (err: any) {
         console.log('error', err.response.data.message)
         set({ errorMessage: err.response.data.message })
+      }
+    },
+    verifyToken: async () => {
+      try {
+        const response = await GetData('/customer/verify-token')
+        const user = response.data
+        set({ user, isLoggedIn: true })
+        console.log('user', user)
+      } catch (err: any) {
+        console.log('error', err.response.data.message)
+        // set({ errorMessage: err.response.data.message })
       }
     },
     signUp: async (email: string, password: string) => {
@@ -80,5 +92,5 @@ async function setAuthToken(token: string | null) {
     localStorage.setItem('token', token)
   } else {
     localStorage.clear()
-  }
+  } 
 }

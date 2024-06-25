@@ -54,10 +54,17 @@ function TrainingTemplates() {
 
   useEffect(() => {
     if (!userStore.isLoggedIn) {
-      navigate('/login')
+      return
     }
     personalTrainingStore.fetchTemplates()
   }, [])
+
+  useEffect(() => {
+    if (!userStore.isLoggedIn) {
+      return
+    }
+    personalTrainingStore.fetchTemplates()
+  }, [userStore.isLoggedIn])
 
   return (
     <>

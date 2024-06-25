@@ -12,6 +12,8 @@ import TrainingTemplates from './pages/TrainingTemplates'
 import TemplateDetail from './pages/TemplateDetail'
 import Training from './pages/Training'
 import History from './pages/History'
+import { useEffect } from 'react'
+import { useUserStore } from './stores/customerStore'
 
 const theme = createTheme({
   palette: {
@@ -25,6 +27,20 @@ const theme = createTheme({
 })
 
 function App() {
+  const userStore = useUserStore()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    const verifyToken = async () => {
+      await userStore.verifyToken()
+    }
+
+    if (token) {
+      verifyToken()
+    }
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <Routes>
